@@ -1,6 +1,7 @@
 " Vundle
 " ---------------------------------------------------------------------------
 set nocompatible              " be iMproved, required
+set backspace=indent,eol,start
 filetype off                  " required
 "filetype Plugin on
 set nomodeline
@@ -14,8 +15,10 @@ set t_Co=256
 "Plug 'gmarik/Vundle.vim'
 " Plug 'SirVer/ultisnips'
 
-"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 call plug#begin('~/.vim/plugged')
+Plug 'tomasr/molokai'
+Plug 'edkolev/tmuxline.vim'
+Plug 'altercation/vim-colors-solarized'
 Plug 'kien/ctrlp.vim'
 Plug 'w0rp/ale'
 Plug 'davidhalter/jedi-vim'
@@ -34,6 +37,7 @@ Plug 'scrooloose/syntastic'
 Plug 'scrooloose/nerdtree'
 Plug 'bling/vim-airline'
 Plug 'nanotech/jellybeans.vim'
+Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'Yggdroot/indentLine'
 Plug 'KurtPreston/vim-autoformat-rails'
 Plug 'jistr/vim-nerdtree-tabs'
@@ -43,8 +47,8 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'posva/vim-vue'
 Plug 'maksimr/vim-jsbeautify'
 Plug 'buoto/gotests-vim'
-" Plug 'plasticboy/vim-markdown'
-" Plug 'suan/vim-instant-markdown'
+Plug 'plasticboy/vim-markdown'
+Plug 'suan/vim-instant-markdown'
 
 " All of your Plugins must be added before the following line
 "
@@ -62,10 +66,15 @@ set completeopt-=preview
 set bg=dark
 set clipboard=unnamed
 syntax on
-set background=dark
-" colorscheme jellybeans
+"color dracula
+"colorscheme jellybeans
+colorscheme default
+"colorscheme solarized
+"colorscheme molokai
 set encoding=utf-8 fileencodings=ucs-bom,utf-8,cp936
-let g:indentLine_color_term = 236
+"let g:indentLine_color_term = 236
+"let g:molokai_original = 1
+"let g:rehash256 = 1
 
 "Automatically remove trailing spaces when saving a file.
 autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
@@ -75,13 +84,13 @@ let g:neocomplete#enable_at_startup = 1
 au FileType ruby let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 
 au BufNewFile,BufRead,BufWrite *.py
-\ set tabstop=4 |
-\ set softtabstop=4 |
-\ set shiftwidth=4 |
-\ set textwidth=79 |
-\ set expandtab |
-\ set autoindent |
-\ set fileformat=unix
+            \ set tabstop=4 |
+            \ set softtabstop=4 |
+            \ set shiftwidth=4 |
+            \ set textwidth=79 |
+            \ set expandtab |
+            \ set autoindent |
+            \ set fileformat=unix
 
 "au BufNewFile,BufRead *.js, *.html, *.css set tabstop=2 softtabstop=2 shiftwidth=2
 "\ set tabstop=2 |
@@ -103,32 +112,32 @@ let g:go_fmt_command = "goimports"
 let g:tagbar_right = 1
 nmap <F8> :TagbarToggle<CR>
 let g:tagbar_type_go = {
-    \ 'ctagstype' : 'go',
-    \ 'kinds'     : [
-        \ 'p:package',
-        \ 'i:imports:1',
-        \ 'c:constants',
-        \ 'v:variables',
-        \ 't:types',
-        \ 'n:interfaces',
-        \ 'w:fields',
-        \ 'e:embedded',
-        \ 'm:methods',
-        \ 'r:constructor',
-        \ 'f:functions'
-    \ ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : {
-        \ 't' : 'ctype',
-        \ 'n' : 'ntype'
-    \ },
-    \ 'scope2kind' : {
-        \ 'ctype' : 't',
-        \ 'ntype' : 'n'
-    \ },
-    \ 'ctagsbin'  : 'gotags',
-    \ 'ctagsargs' : '-sort -silent'
-	\ }
+            \ 'ctagstype' : 'go',
+            \ 'kinds'     : [
+            \ 'p:package',
+            \ 'i:imports:1',
+            \ 'c:constants',
+            \ 'v:variables',
+            \ 't:types',
+            \ 'n:interfaces',
+            \ 'w:fields',
+            \ 'e:embedded',
+            \ 'm:methods',
+            \ 'r:constructor',
+            \ 'f:functions'
+            \ ],
+            \ 'sro' : '.',
+            \ 'kind2scope' : {
+            \ 't' : 'ctype',
+            \ 'n' : 'ntype'
+            \ },
+            \ 'scope2kind' : {
+            \ 'ctype' : 't',
+            \ 'ntype' : 'n'
+            \ },
+            \ 'ctagsbin'  : 'gotags',
+            \ 'ctagsargs' : '-sort -silent'
+            \ }
 
 " syntastic
 " ---------------------------------------------------------------------------
@@ -170,5 +179,5 @@ func! CompileRun()
     endif
 endfunc
 if exists('$TMUX')
-   set term=screen-256color
+    set term=screen-256color
 endif
