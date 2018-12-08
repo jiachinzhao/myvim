@@ -159,10 +159,14 @@ au FileType go let g:syntastic_auto_loc_list = 0
 " key mapping
 " ---------------------------------------------------------------------------
 au FileType go nmap gd <Plug>(go-def)
+au FileType go nmap gr <Plug>(go-referrers)
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
 au FileType go nmap <leader>t <Plug>(go-test)
-
+"GoAddTags addtags for struct
+nmap <C-a> :GoAddTags<CR>
+"
+nmap <C-I> :GoFillStruct<CR>
 nmap <C-h> :CtrlPBuffer<CR>
 nmap <C-y> :NERDTreeToggle<CR>
 
@@ -175,6 +179,9 @@ func! CompileRun()
         exec "!time python2.7 %"
     elseif &filetype == 'cpp'
         exec "!g++ % -o %<"
+        exec "!time ./%<"
+    elseif &filetype == 'c'
+        exec "!gcc % -o %<"
         exec "!time ./%<"
     endif
 endfunc
